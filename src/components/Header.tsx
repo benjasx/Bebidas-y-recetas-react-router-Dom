@@ -7,7 +7,7 @@ export default function Header() {
                 <div>
                     <img className="w-32" src="/logo.svg" alt="logotipo" />
                 </div>
-                <div></div>
+                <nav></nav>
             </div>
         </div>
     </header>
