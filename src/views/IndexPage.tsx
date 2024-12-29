@@ -3,7 +3,7 @@
 export default function indexPage() {
   return (
     <>
-      <div>Index</div>
+      <div className="mx-auto container px-5">Index</div>
     </>
   );
 }
