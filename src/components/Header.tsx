@@ -1,10 +1,20 @@
-import { useMemo } from "react";
-import { NavLink, useLocation } from "react-router-dom";
+import {  useEffect, useMemo } from "react";
+import { useLocation, NavLink } from "react-router-dom";
+import { useAppStore } from "../stores/useAppStore";
 
 export default function Header() {
 
   const  {pathname} = useLocation();
   const isHome = useMemo(()=> pathname === '/', [pathname])
+  const fetchCategories = useAppStore((state) => state.fetchCategories)
+  const categories = useAppStore((state) => state.categories)
+
+
+
+  useEffect (()=>{
+    fetchCategories()
+  })
+  
   return (
     <header className={isHome ? 'bg-header bg-center bg-cover' : 'bg-slate-800'}>
         <div className="mx-auto container px-5 py-16">
@@ -50,6 +60,12 @@ export default function Header() {
                     className="p-3 w-full rounded-lg focus:outline-none" 
                   >
                   <option value="">-- Seleccione --</option>
+                  {categories.drinks.map(category => (
+                    <option
+                      value={category.strCategory}
+                      key={category.strCategory}
+                    >{category.strCategory}</option>
+                  ))}
                   </select>
                 </div>
                 <input type="submit" value={'Buscar Resetas'} className="cursor-pointer bg-orange-800 hover:bg-orange-900 text-white font-extrabold w-full p-2 rounded-lg uppercase"/>
