@@ -1,3 +1,4 @@
+import DrinkCard from "../components/DrinkCard";
 import { useAppStore } from "../stores/useAppStore";
 
 export default function IndexPage() {
@@ -15,9 +16,10 @@ export default function IndexPage() {
           {/* Renderiza la lista de bebidas, si es necesario */}
           <ul>
             {drinks.drinks.map((drink) => (
-              <li key={drink.idDrink}>
-                {drink.strDrink}
-              </li>
+              <DrinkCard
+                key={drink.idDrink}
+                drink={drink}
+              />
             ))}
           </ul>
         </div>
