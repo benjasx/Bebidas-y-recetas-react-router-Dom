@@ -11,17 +11,11 @@ export default function IndexPage() {
     <>
       <h1 className="text-6xl font-extrabold">Recetas</h1>
       {hasDrinks ? (
-        <div>
-          <p>¡Sí hay bebidas!</p>
+        <div className="grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-3 my-10 gap-10">
           {/* Renderiza la lista de bebidas, si es necesario */}
-          <ul>
-            {drinks.drinks.map((drink) => (
-              <DrinkCard
-                key={drink.idDrink}
-                drink={drink}
-              />
-            ))}
-          </ul>
+          {drinks.drinks.map((drink) => (
+            <DrinkCard key={drink.idDrink} drink={drink} />
+          ))}
         </div>
       ) : (
         <p className="my-10 text-center text-2xl">No hay bebidas disponibles</p>

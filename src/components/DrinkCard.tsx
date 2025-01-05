@@ -1,14 +1,26 @@
-import type { Drink } from "../types"
+import type { Drink } from "../types";
 
 type DrinkCardProps = {
-    drink: Drink
-}
+  drink: Drink;
+};
 
-
-export default function DrinkCard({drink} : DrinkCardProps) {
+export default function DrinkCard({ drink }: DrinkCardProps) {
   return (
-    <div>
-        <h2>{drink.strDrink}</h2>
+    <div className="boder shadow-lg">
+      <div className="overflow-hidden">
+        <img
+          src={drink.strDrinkThumb}
+          alt={`Imagen de ${drink.strDrinkThumb}`}
+          className="hover:scale-110 transition-transform hover:rotate-2"
+        />
+      </div>
+      <div className="p-5">
+        <h2 className="text-2xl truncate font-black">{drink.strDrink}</h2>
+      </div>
+      <button
+        type="button"
+        className="bg-orange-400 hover:bg-orange-500 mt-5 w-full p-3 font-bold text-white text-lg"
+      >Ver Receta</button>
     </div>
-  )
+  );
 }
