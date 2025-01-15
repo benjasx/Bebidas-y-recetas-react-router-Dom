@@ -4,6 +4,7 @@ import { Recipe } from "../types";
 export type FavoritesSliceType = {
   favorites: Recipe[];
   handleClickFavorite: (recipe: Recipe) => void;
+  favoriteSlice: (id:Recipe['idDrink']) => boolean
 };
 
 //sliceParent
@@ -27,4 +28,8 @@ export const createfavoritesSlices: StateCreator<FavoritesSliceType> = (
       console.log("se agrega...");
     }
   },
+
+  favoriteSlice: (id) => {
+    return get().favorites.some((favorite) => favorite.idDrink === id)
+  }
 });
