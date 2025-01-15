@@ -7,7 +7,7 @@ import {
 } from "@headlessui/react";
 import { Fragment } from "react";
 import { useAppStore } from "../stores/useAppStore";
-import { Recipi } from "../types";
+import { Recipe } from "../types";
 
 export default function Modal() {
   const modal = useAppStore((state) => state.modal);
@@ -17,8 +17,8 @@ export default function Modal() {
   const renderIngredients = () => {
     const ingredients: JSX.Element[] = [];
     for (let i = 1; i <= 6; i++) {
-      const ingredient = selectedRecipi[`strIngredient${i}` as keyof Recipi];
-      const measure = selectedRecipi[`strMeasure${i}` as keyof Recipi];
+      const ingredient = selectedRecipi[`strIngredient${i}` as keyof Recipe];
+      const measure = selectedRecipi[`strMeasure${i}` as keyof Recipe];
 
       if (ingredient && measure) {
         ingredients.push(
@@ -83,6 +83,24 @@ export default function Modal() {
                     Instrucciones
                   </DialogTitle>
                   <p className="text-lg">{selectedRecipi.strInstructions}</p>
+                  <div className="mt-5 flex justify-between gap-4">
+                    <button
+                      type="button"
+                      className="w-full rounded bg-gray-600 p-3 font-bold uppercase text-white shadow hover:bg-gray-500"
+                      onClick={closeModal}
+                    >
+                      Cerrar
+                    </button>
+
+                    <button
+                      type="button"
+                      className="w-full rounded bg-orange-600 p-3 font-bold uppercase text-white shadow hover:bg-orange-500"
+                      /* onClick={} */
+                    >
+                      Agregar a favoritos
+                    </button>
+                  </div>
+
                 </DialogPanel>
               </TransitionChild>
             </div>
