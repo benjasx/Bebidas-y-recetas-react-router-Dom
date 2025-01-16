@@ -1,35 +1,39 @@
 import { StateCreator } from "zustand";
 import { Recipe } from "../types";
+import { createRecipesSlice, RecipesSliceType } from "./recipeSlice";
+
+
 
 export type FavoritesSliceType = {
   favorites: Recipe[];
   handleClickFavorite: (recipe: Recipe) => void;
-  favoriteSlice: (id:Recipe['idDrink']) => boolean
+  favoritExist: (id:Recipe['idDrink']) => boolean
 };
 
 //sliceParent
-export const createfavoritesSlices: StateCreator<FavoritesSliceType> = (
+export const createfavoritesSlices: StateCreator<FavoritesSliceType & RecipesSliceType, [] ,[], FavoritesSliceType> = (
   set,
-  get
+  get,
+  api
 ) => ({
   favorites: [],
   handleClickFavorite: (recipe) => {
     if (
-      get().favorites.some((favorite) => favorite.idDrink === recipe.idDrink)
+      get().favoritExist(recipe.idDrink)
     ) {
       set((state) => ({
         favorites: state.favorites.filter(favorite => favorite.idDrink !== recipe.idDrink)
       }))
     } else {
-      console.log("No existe");
+      
       set((state)=> ({
         favorites: [...state.favorites, recipe],
       }))
-      console.log("se agrega...");
     }
+    createRecipesSlice(set, get, api).closeModal()
   },
 
-  favoriteSlice: (id) => {
+  favoritExist: (id) => {
     return get().favorites.some((favorite) => favorite.idDrink === id)
   }
 });
